@@ -94,7 +94,7 @@ export default function Signup() {
           </div>
         </div>
 
-        <div className="bg-white/70 dark:bg-surface-900/60 backdrop-blur-2xl border border-white/60 dark:border-surface-700/50 rounded-3xl p-8 shadow-2xl">
+        <div className="bg-white/70 dark:bg-surface-900/60  border border-white/60 dark:border-surface-700/50 rounded-3xl p-8 shadow-2xl">
           <div className="mb-7">
             <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-1.5">Create account</h1>
             <p className="text-sm text-surface-500 dark:text-surface-400">Start tracking your finances today</p>

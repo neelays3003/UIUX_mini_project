@@ -19,7 +19,6 @@ A production-ready expense tracker built with React, Tailwind CSS, Recharts, and
 git clone <repo>
 cd expense-tracker
 npm install
-cp .env.example .env
 npm start
 ```
 

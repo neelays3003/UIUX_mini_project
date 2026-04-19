@@ -57,7 +57,7 @@ export default function TransactionModal({ onClose, editing }) {
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }));
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40  animate-fade-in">
       <div className="card w-full max-w-md p-6 animate-slide-up">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

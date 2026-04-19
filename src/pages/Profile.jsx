@@ -68,7 +68,7 @@ export default function Profile() {
 
       {/* Budget alerts */}
       {overBudget.length > 0 && (
-        <motion.div variants={fadeUp} className="card p-5 border-amber-200/60 dark:border-amber-500/20 bg-amber-50/60 dark:bg-amber-500/5 backdrop-blur-xl">
+        <motion.div variants={fadeUp} className="card p-5 border-amber-200/60 dark:border-amber-500/20 bg-amber-50/60 dark:bg-amber-500/5 ">
           <h3 className="text-sm font-bold text-amber-800 dark:text-amber-300 mb-3 flex items-center gap-2">
             <span className="text-base">⚠️</span> Budget Alerts
           </h3>
@@ -146,7 +146,7 @@ export default function Profile() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.03 }}
-                className="bg-surface-50/80 dark:bg-surface-800/40 backdrop-blur-sm rounded-xl p-4 border border-surface-100/60 dark:border-surface-700/30"
+                className="bg-surface-50/80 dark:bg-surface-800/40  rounded-xl p-4 border border-surface-100/60 dark:border-surface-700/30"
               >
                 <div className="flex items-center gap-2 mb-2.5">
                   <span className="text-base">{cat.icon}</span>
@@ -165,7 +165,7 @@ export default function Profile() {
                     placeholder="No limit"
                     value={budgetInputs[cat.id] || ''}
                     onChange={e => setBudgetInputs(p => ({ ...p, [cat.id]: e.target.value }))}
-                    className="flex-1 bg-white/80 dark:bg-surface-900/50 backdrop-blur-sm border border-surface-200/60 dark:border-surface-700/40 rounded-lg px-3 py-2 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500 transition-all"
+                    className="flex-1 bg-white/80 dark:bg-surface-900/50  border border-surface-200/60 dark:border-surface-700/40 rounded-lg px-3 py-2 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500 transition-all"
                   />
                 </div>
                 {limit > 0 && (

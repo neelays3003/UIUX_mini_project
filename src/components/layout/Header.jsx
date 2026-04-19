@@ -16,7 +16,7 @@ export default function Header() {
   const info = PAGE_TITLES[pathname] || { title: 'Finely', sub: '' };
 
   return (
-    <header className="sticky top-0 z-20 bg-white/60 dark:bg-surface-900/50 backdrop-blur-2xl border-b border-white/40 dark:border-surface-800/40 px-4 lg:px-6 xl:px-8 py-4 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-20 bg-white dark:bg-[#11131a] border-b border-surface-200 dark:border-surface-800/60 px-4 lg:px-6 xl:px-8 py-4 flex items-center justify-between gap-4">
       {/* Left: hamburger + title */}
       <div className="flex items-center gap-3">
         <button

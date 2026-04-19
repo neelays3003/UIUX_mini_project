@@ -199,12 +199,9 @@ export default function Transactions() {
             {filtered.map((tx, i) => {
               const cat = CATEGORY_MAP[tx.category];
               return (
-                <motion.div
+                <div
                   key={tx.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: Math.min(i * 0.03, 0.3) }}
-                  className="flex items-center gap-3 sm:gap-4 px-6 py-4 hover:bg-surface-50/80 dark:hover:bg-surface-800/30 transition-all duration-200 group"
+                  className="flex items-center gap-3 sm:gap-4 px-6 py-4 hover:bg-surface-50 dark:hover:bg-surface-800/80 hover:-translate-y-0.5 hover:shadow-md hover:z-10 transition-all duration-200 group relative border-b border-surface-100 dark:border-surface-800/40 last:border-0"
                 >
                   {/* Icon */}
                   <div
@@ -249,7 +246,7 @@ export default function Transactions() {
                       <Trash2 size={13} />
                     </button>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>

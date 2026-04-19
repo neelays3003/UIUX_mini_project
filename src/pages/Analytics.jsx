@@ -30,7 +30,7 @@ export default function Analytics() {
   const expenses   = useMemo(() => getTotal(thisMonth, 'expense'), [thisMonth]);
 
   const GlassTooltip = ({ children }) => (
-    <div className="bg-white/90 dark:bg-surface-900/90 backdrop-blur-xl border border-white/60 dark:border-surface-700/50 rounded-xl p-3 shadow-xl text-xs">
+    <div className="bg-white/90 dark:bg-surface-900/90  border border-white/60 dark:border-surface-700/50 rounded-xl p-3 shadow-xl text-xs">
       {children}
     </div>
   );
@@ -79,7 +79,7 @@ export default function Analytics() {
             className={`px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-200 ${
               monthRange === m
                 ? 'bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-lg shadow-brand-500/25'
-                : 'bg-white/70 dark:bg-surface-900/50 backdrop-blur-sm border border-surface-200/60 dark:border-surface-700/40 text-surface-600 dark:text-surface-400 hover:border-brand-300 dark:hover:border-brand-600'
+                : 'bg-white/70 dark:bg-surface-900/50  border border-surface-200/60 dark:border-surface-700/40 text-surface-600 dark:text-surface-400 hover:border-brand-300 dark:hover:border-brand-600'
             }`}
           >
             {m}M
@@ -254,7 +254,7 @@ export default function Analytics() {
                 { label: 'Expenses', value: formatCurrency(expenses),  color: 'text-red-500 dark:text-red-400', bg: 'bg-red-50/80 dark:bg-red-500/10' },
                 { label: 'Saved',    value: formatCurrency(income - expenses), color: income >= expenses ? 'text-brand-600 dark:text-brand-400' : 'text-red-500', bg: 'bg-brand-50/80 dark:bg-brand-500/10' },
               ].map(s => (
-                <div key={s.label} className={`${s.bg} backdrop-blur-sm rounded-xl p-4 text-center border border-white/40 dark:border-surface-700/30`}>
+                <div key={s.label} className={`${s.bg}  rounded-xl p-4 text-center border border-white/40 dark:border-surface-700/30`}>
                   <p className={`text-lg font-extrabold ${s.color}`}>{s.value}</p>
                   <p className="text-xs text-surface-500 dark:text-surface-400 mt-1 font-medium">{s.label}</p>
                 </div>

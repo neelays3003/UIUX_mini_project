@@ -42,9 +42,9 @@ module.exports = {
         'glow-red':    '0 0 20px -5px rgba(239, 68, 68, 0.4)',
         'glow-purple': '0 0 20px -5px rgba(139, 92, 246, 0.4)',
         'glow-amber':  '0 0 20px -5px rgba(245, 158, 11, 0.4)',
-        'glass':       '0 8px 32px rgba(0, 0, 0, 0.08)',
-        'glass-lg':    '0 16px 48px rgba(0, 0, 0, 0.12)',
-        'inner-glow':  'inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
+        'premium':     '0 8px 30px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02)',
+        'premium-hover': '0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.03)',
+        'inner-glow':  'inset 0 1px 0 0 rgba(255, 255, 255, 0.08)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

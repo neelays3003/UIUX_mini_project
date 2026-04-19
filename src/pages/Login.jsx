@@ -88,7 +88,7 @@ export default function Login() {
           </div>
         </div>
 
-        <div className="bg-white/70 dark:bg-surface-900/60 backdrop-blur-2xl border border-white/60 dark:border-surface-700/50 rounded-3xl p-8 shadow-2xl">
+        <div className="bg-white/70 dark:bg-surface-900/60  border border-white/60 dark:border-surface-700/50 rounded-3xl p-8 shadow-2xl">
           <div className="mb-7">
             <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-1.5">Welcome back</h1>
             <p className="text-sm text-surface-500 dark:text-surface-400">Sign in to your account to continue</p>
@@ -167,7 +167,7 @@ export default function Login() {
           <button
             onClick={demoLogin}
             disabled={loading}
-            className="w-full py-3 rounded-xl border border-surface-200/60 dark:border-surface-700/40 text-sm font-semibold text-surface-600 dark:text-surface-300 hover:bg-surface-50 dark:hover:bg-surface-800/50 transition-all duration-200 flex items-center justify-center gap-2 backdrop-blur-sm"
+            className="w-full py-3 rounded-xl border border-surface-200/60 dark:border-surface-700/40 text-sm font-semibold text-surface-600 dark:text-surface-300 hover:bg-surface-50 dark:hover:bg-surface-800/50 transition-all duration-200 flex items-center justify-center gap-2 "
           >
             <Sparkles size={14} className="text-brand-500" />
             Try demo account

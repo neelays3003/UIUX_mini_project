@@ -25,6 +25,7 @@ const fadeUp = {
 };
 
 export default function Dashboard() {
+  console.log("Dashboard rendering...");
   const { transactions } = useApp();
   const [formOpen, setFormOpen] = useState(false);
 
@@ -40,7 +41,7 @@ export default function Dashboard() {
   const CustomTooltip = ({ active, payload, label }) => {
     if (!active || !payload?.length) return null;
     return (
-      <div className="bg-white/90 dark:bg-surface-900/90 backdrop-blur-xl border border-white/60 dark:border-surface-700/50 rounded-xl p-3 shadow-xl text-xs">
+      <div className="bg-white/90 dark:bg-surface-900/90  border border-white/60 dark:border-surface-700/50 rounded-xl p-3 shadow-xl text-xs">
         <p className="font-bold text-gray-800 dark:text-gray-200 mb-2">{label}</p>
         {payload.map(p => (
           <p key={p.dataKey} style={{ color: p.color }} className="flex items-center gap-2">
@@ -95,8 +96,8 @@ export default function Dashboard() {
               <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false}
                 tickFormatter={v => `₹${v >= 1000 ? `${(v/1000).toFixed(0)}k` : v}`} />
               <Tooltip content={<CustomTooltip />} />
-              <Area type="monotone" dataKey="income"  stroke="#22c55e" strokeWidth={2.5} fill="url(#gIncome)"  dot={false} />
-              <Area type="monotone" dataKey="expense" stroke="#ef4444" strokeWidth={2.5} fill="url(#gExpense)" dot={false} />
+              <Area type="monotone" dataKey="income" isAnimationActive={false} stroke="#22c55e" strokeWidth={2.5} fill="url(#gIncome)"  dot={false} />
+              <Area type="monotone" dataKey="expense" isAnimationActive={false} stroke="#ef4444" strokeWidth={2.5} fill="url(#gExpense)" dot={false} />
             </AreaChart>
           </ResponsiveContainer>
           <div className="flex gap-5 mt-3 justify-center">
@@ -185,12 +186,9 @@ export default function Dashboard() {
               {recent.map((tx, i) => {
                 const cat = CATEGORY_MAP[tx.category];
                 return (
-                  <motion.div
+                  <div
                     key={tx.id}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04 }}
-                    className="flex items-center gap-3 px-6 py-3.5 hover:bg-surface-50/80 dark:hover:bg-surface-800/30 transition-colors group"
+                    className="flex items-center gap-3 px-6 py-3.5 hover:bg-surface-50 dark:hover:bg-surface-800/80 hover:-translate-y-0.5 hover:shadow-md hover:z-10 transition-all duration-200 group relative border-b border-surface-100 dark:border-surface-800/40 last:border-0"
                   >
                     <div
                       className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-base group-hover:scale-110 transition-transform duration-200"
@@ -211,7 +209,7 @@ export default function Dashboard() {
                     }`}>
                       {tx.type === 'income' ? '+' : '-'}{formatCurrency(tx.amount)}
                     </span>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>

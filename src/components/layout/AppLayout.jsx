@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 
 export default function AppLayout() {
+  console.log("AppLayout rendering...");
   return (
     <div className="flex h-screen overflow-hidden bg-surface-50 dark:bg-surface-950">
       {/* Mesh gradient background */}

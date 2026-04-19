@@ -21,7 +21,7 @@ export function Modal({ open, onClose, title, children, size = 'md' }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-black/50 backdrop-blur-md"
+            className="absolute inset-0 bg-black/50 "
             onClick={onClose}
           />
           <motion.div
@@ -29,7 +29,7 @@ export function Modal({ open, onClose, title, children, size = 'md' }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className={`relative w-full ${sizes[size]} bg-white/90 dark:bg-surface-900/90 backdrop-blur-2xl rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 dark:border-surface-700/50`}
+            className={`relative w-full ${sizes[size]} bg-white/90 dark:bg-surface-900/90  rounded-2xl sm:rounded-3xl shadow-2xl border border-white/60 dark:border-surface-700/50`}
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-surface-100/80 dark:border-surface-800/60">
               <h2 className="text-base font-bold text-gray-900 dark:text-white">{title}</h2>
@@ -92,7 +92,7 @@ export function StatCard({ label, value, sub, icon: Icon, color = 'brand', trend
 export function CategoryBadge({ category }) {
   return (
     <span
-      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold backdrop-blur-sm"
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold "
       style={{
         backgroundColor: (category?.color || '#94a3b8') + '18',
         color: category?.color || '#94a3b8',
@@ -151,7 +151,7 @@ export function InsightCard({ type, title, text }) {
     <motion.div
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
-      className={`flex gap-3 p-4 rounded-xl border backdrop-blur-sm ${s.bg} ${s.border} shadow-sm ${s.glow} hover:shadow-md transition-shadow duration-200`}
+      className={`flex gap-3 p-4 rounded-xl border  ${s.bg} ${s.border} shadow-sm ${s.glow} hover:shadow-md transition-shadow duration-200`}
     >
       <span className="text-base flex-shrink-0 mt-0.5">{s.icon}</span>
       <div>

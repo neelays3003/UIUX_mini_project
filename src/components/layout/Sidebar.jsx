@@ -24,7 +24,7 @@ export default function Sidebar() {
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 lg:hidden animate-fade-in"
+          className="fixed inset-0 bg-black/40  z-30 lg:hidden animate-fade-in"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -32,9 +32,8 @@ export default function Sidebar() {
       {/* Sidebar */}
       <aside className={`
         fixed top-0 left-0 h-full w-[272px] z-40
-        bg-white/70 dark:bg-surface-900/80
-        backdrop-blur-2xl
-        border-r border-white/50 dark:border-surface-800/60
+        bg-white dark:bg-[#11131a]
+        border-r border-surface-200 dark:border-surface-800/60
         flex flex-col transition-all duration-300 ease-out
         lg:translate-x-0 lg:static lg:z-auto
         ${sidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'}
@@ -91,7 +90,7 @@ export default function Sidebar() {
         </nav>
 
         {/* User section */}
-        <div className="p-4 mx-3 mb-3 rounded-2xl bg-surface-50/80 dark:bg-surface-800/50 backdrop-blur-xl border border-surface-100 dark:border-surface-700/50">
+        <div className="p-4 mx-3 mb-3 rounded-2xl bg-surface-50 dark:bg-surface-800/50 border border-surface-200 dark:border-surface-700">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-purple-500 flex items-center justify-center text-white text-sm font-bold shadow-md shadow-brand-500/20 flex-shrink-0">
               {user?.avatar || 'U'}
