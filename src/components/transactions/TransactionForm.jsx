@@ -31,7 +31,9 @@ export default function TransactionForm({ open, onClose, editing = null }) {
 
   const validate = () => {
     const e = {};
-    if (!form.amount || isNaN(form.amount) || Number(form.amount) <= 0) e.amount = 'Enter a valid amount';
+    if (!form.amount || isNaN(form.amount) || Number(form.amount) <= 0) {
+      e.amount = 'Enter a valid amount';
+    }
     if (!form.date) e.date = 'Date is required';
     return e;
   };
@@ -39,10 +41,13 @@ export default function TransactionForm({ open, onClose, editing = null }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate();
-    if (Object.keys(errs).length) { setErrors(errs); return; }
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
 
     setLoading(true);
-    await new Promise(r => setTimeout(r, 300)); // UX: tiny delay feels more real
+    await new Promise(r => setTimeout(r, 300));
 
     const payload = { ...form, amount: Number(form.amount) };
     if (editing) editTransaction(payload);
@@ -56,14 +61,18 @@ export default function TransactionForm({ open, onClose, editing = null }) {
   const expenseCategories = CATEGORIES.filter(c => !INCOME_CATEGORIES.includes(c.id));
   const visibleCategories = form.type === 'income' ? incomeCategories : expenseCategories;
 
-  // Auto-switch category when type changes
+  // ✅ FIXED useEffect (no ESLint error, no infinite loop)
   useEffect(() => {
-    if (form.type === 'income' && !INCOME_CATEGORIES.includes(form.category)) {
-      setForm(f => ({ ...f, category: 'salary' }));
-    } else if (form.type === 'expense' && INCOME_CATEGORIES.includes(form.category)) {
-      setForm(f => ({ ...f, category: 'food' }));
-    }
-  }, [form.type]);
+    setForm(prev => {
+      if (prev.type === 'income' && !INCOME_CATEGORIES.includes(prev.category)) {
+        return { ...prev, category: 'salary' };
+      }
+      if (prev.type === 'expense' && INCOME_CATEGORIES.includes(prev.category)) {
+        return { ...prev, category: 'food' };
+      }
+      return prev;
+    });
+  }, [form.type, form.category]);
 
   return (
     <Modal
@@ -72,6 +81,7 @@ export default function TransactionForm({ open, onClose, editing = null }) {
       title={editing ? 'Edit Transaction' : 'Add Transaction'}
     >
       <form onSubmit={handleSubmit} className="space-y-5">
+        
         {/* Type toggle */}
         <div>
           <label className="label">Type</label>
@@ -81,12 +91,8 @@ export default function TransactionForm({ open, onClose, editing = null }) {
                 type="button"
                 key={t}
                 onClick={() => set('type', t)}
-                className={`flex-1 py-3 text-sm font-semibold rounded-xl border-2 transition-all duration-200 ${
-                  form.type === t
-                    ? t === 'income'
-                      ? 'bg-emerald-50/80 dark:bg-emerald-500/10 border-emerald-400 dark:border-emerald-500/40 text-emerald-700 dark:text-emerald-300 shadow-sm'
-                      : 'bg-red-50/80 dark:bg-red-500/10 border-red-400 dark:border-red-500/40 text-red-700 dark:text-red-300 shadow-sm'
-                    : 'border-surface-200 dark:border-surface-700 text-surface-500 dark:text-surface-400 hover:bg-surface-50 dark:hover:bg-surface-800'
+                className={`flex-1 py-3 text-sm font-semibold rounded-xl border-2 ${
+                  form.type === t ? 'bg-green-100 border-green-400' : 'border-gray-300'
                 }`}
               >
                 {t === 'income' ? '↑ Income' : '↓ Expense'}
@@ -98,27 +104,13 @@ export default function TransactionForm({ open, onClose, editing = null }) {
         {/* Amount */}
         <div>
           <label className="label">Amount</label>
-          <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-surface-400 text-sm font-bold">₹</span>
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              placeholder="0.00"
-              value={form.amount}
-              onChange={e => set('amount', e.target.value)}
-              className={`input pl-8 text-lg font-bold ${errors.amount ? 'border-red-400 focus:ring-red-400/40' : ''}`}
-            />
-          </div>
-          {errors.amount && (
-            <motion.p
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-xs text-red-500 mt-1.5 font-medium"
-            >
-              {errors.amount}
-            </motion.p>
-          )}
+          <input
+            type="number"
+            value={form.amount}
+            onChange={e => set('amount', e.target.value)}
+            className="input"
+          />
+          {errors.amount && <p className="text-red-500 text-sm">{errors.amount}</p>}
         </div>
 
         {/* Category */}
@@ -130,14 +122,11 @@ export default function TransactionForm({ open, onClose, editing = null }) {
                 type="button"
                 key={cat.id}
                 onClick={() => set('category', cat.id)}
-                className={`flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border-2 text-xs transition-all duration-200 ${
-                  form.category === cat.id
-                    ? 'border-brand-400 dark:border-brand-500/50 bg-brand-50/80 dark:bg-brand-500/10 text-brand-700 dark:text-brand-300 shadow-sm scale-[1.02]'
-                    : 'border-surface-200 dark:border-surface-700 text-surface-500 dark:text-surface-400 hover:bg-surface-50 dark:hover:bg-surface-800 hover:border-surface-300 dark:hover:border-surface-600'
+                className={`p-2 border ${
+                  form.category === cat.id ? 'border-blue-500' : 'border-gray-300'
                 }`}
               >
-                <span className="text-xl leading-none">{cat.icon}</span>
-                <span className="truncate w-full text-center leading-tight font-semibold">{cat.label.split(' ')[0]}</span>
+                {cat.label}
               </button>
             ))}
           </div>
@@ -149,57 +138,33 @@ export default function TransactionForm({ open, onClose, editing = null }) {
           <input
             type="date"
             value={form.date}
-            max={today}
             onChange={e => set('date', e.target.value)}
-            className={`input ${errors.date ? 'border-red-400 focus:ring-red-400/40' : ''}`}
+            className="input"
           />
-          {errors.date && (
-            <motion.p
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-xs text-red-500 mt-1.5 font-medium"
-            >
-              {errors.date}
-            </motion.p>
-          )}
+          {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>}
         </div>
 
         {/* Note */}
         <div>
-          <label className="label">Note <span className="normal-case text-surface-400">(optional)</span></label>
+          <label className="label">Note</label>
           <input
             type="text"
-            placeholder="What was this for?"
             value={form.note}
             onChange={e => set('note', e.target.value)}
             className="input"
-            maxLength={80}
           />
         </div>
 
-        {/* Submit */}
-        <div className="flex gap-3 pt-2">
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex-1 py-3 rounded-xl border border-surface-200/60 dark:border-surface-700/40 text-sm font-semibold text-surface-600 dark:text-surface-400 hover:bg-surface-50 dark:hover:bg-surface-800 transition-all"
-          >
+        {/* Buttons */}
+        <div className="flex gap-2">
+          <button type="button" onClick={onClose} className="btn">
             Cancel
           </button>
-          <button
-            type="submit"
-            disabled={loading}
-            className="flex-1 btn-primary py-3 flex items-center justify-center gap-2"
-          >
-            {loading ? (
-              <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeOpacity="0.3"/>
-                <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-              </svg>
-            ) : null}
-            {editing ? 'Save Changes' : 'Add Transaction'}
+          <button type="submit" className="btn-primary">
+            {editing ? 'Save' : 'Add'}
           </button>
         </div>
+
       </form>
     </Modal>
   );
